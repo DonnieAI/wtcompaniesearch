@@ -1,17 +1,21 @@
 import streamlit as st
-from db import get_companies_clean, google_search,summarize_web_page,extract_at_words
+
 import pandas as pd
 from pathlib import Path
 import pandas as pd
-import psycopg2
-from dotenv import load_dotenv
+#import psycopg2
+#from dotenv import load_dotenv
 import os
-from urllib.parse import urlparse
-from sqlalchemy import create_engine
+#from urllib.parse import urlparse
+#from sqlalchemy import create_engine
 import plotly.express as px
 import pandas as pd
 import plotly.graph_objects as go
-from db import get_companies_clean
+
+from db import get_companies_clean_pd, google_search,summarize_web_page,extract_at_words
+
+from utils import apply_style_and_logo
+apply_style_and_logo()
 
 st.title("Companies Overview")
 
@@ -21,8 +25,8 @@ if refresh:
     st.cache_data.clear()
 
 # Load cleaned data (your cached function)
-df_clean = get_companies_clean()
-
+df_clean = get_companies_clean_pd()
+df_clean.columns = [c.strip().upper() for c in df_clean.columns]
 # --- Filters ---
 # Build options (include "All")
 country_opts = ["All"] + sorted(df_clean["COUNTRY_ISO2"].dropna().unique().tolist())
@@ -56,15 +60,14 @@ st.dataframe(
     #Download=False
 )
 
-
 # --- Company website lookup form ---
 st.subheader("Find Company Website")
 
 # Company selection dropdown from the filtered dataframe
 company_selected = st.selectbox(
-    "Select company", 
-    sorted(df_filtered["COMPANY"].unique())
-)
+                    "Select company", 
+                    sorted(df_filtered["COMPANY"].unique())
+            )
 
 # Show the website directly when a company is chosen
 if company_selected:

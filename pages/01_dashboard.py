@@ -6,17 +6,17 @@ import pandas as pd
 from pathlib import Path
 import pandas as pd
 
-import psycopg2
+#import psycopg2
 from dotenv import load_dotenv
 
-from urllib.parse import urlparse
-from sqlalchemy import create_engine
+#from urllib.parse import urlparse
+#from sqlalchemy import create_engine
 
 import plotly.express as px
 
 import plotly.graph_objects as go
 
-from db import get_companies_clean
+from db import get_companies_clean_pd
 
 #-----------------------------------------------------------------------
 st.set_page_config(page_title="map", layout="wide")
@@ -26,12 +26,11 @@ apply_style_and_logo()
 
 st.title("Companies Overview")
 
-
 refresh = st.button("Refresh data")
 if refresh:
     st.cache_data.clear()
 
-df_clean=get_companies_clean()
+df_clean=get_companies_clean_pd()
 
 st.markdown(f"**Wavetransition companies database** based on **{df_clean.shape[0]}** records")
 

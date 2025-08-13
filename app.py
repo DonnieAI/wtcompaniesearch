@@ -107,6 +107,6 @@ st.markdown(
 
     ### ⚠️ **Note**
     This app focuses on **company-level insights** combining internal data with 
-    external sources. Detailed sector reports and market forecasts are available in other tools.
+    external sources. Detailed sector reports and market forecasts are available in other WT's applications.
     """
 )
