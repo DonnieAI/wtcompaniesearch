@@ -8,20 +8,17 @@ import os
 import os
 import time
 
-
 #import psycopg2
 from dotenv import load_dotenv
 
 #from urllib.parse import urlparse
 #from sqlalchemy import create_engine
 import streamlit as st
-
 import requests
 from bs4 import BeautifulSoup
 
 import streamlit as st
 #from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
-
 
 
 @st.cache_data(ttl=15 * 60)
